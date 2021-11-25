@@ -6,7 +6,7 @@ import cors from 'cors';
 import bindRoutes from './routes.mjs';
 
 // const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
-const FRONTEND_URL = 'http://localhost:3000';
+const FRONTEND_URL = 'https://desolate-mesa-48890.herokuapp.com';
 // Initialise Express instance
 const app = express();
 // Set CORS headers
