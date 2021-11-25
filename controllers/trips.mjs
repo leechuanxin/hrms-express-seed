@@ -4,7 +4,7 @@ export default function initTripsController(db) {
   const index = (request, response) => {
     db.Trip.findAll()
       .then((trips) => {
-        response.send({trips});
+        response.send({ trips });
       })
       .catch((error) => console.log(error));
   };
