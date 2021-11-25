@@ -34,6 +34,6 @@ export default function initRouteModel(sequelize, DataTypes) {
     {
       // The underscored option makes Sequelize reference snake_case names in the DB.
       underscored: true,
-    }
+    },
   );
-};
+}
