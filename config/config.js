@@ -1,8 +1,8 @@
 module.exports = {
   development: {
-    username: 'akira',
+    username: 'chuanxin',
     password: null,
-    database: 'climbing_development',
+    database: 'hrms_express_development',
     host: '127.0.0.1',
     dialect: 'postgres',
   },
