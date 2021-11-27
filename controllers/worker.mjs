@@ -8,7 +8,7 @@ export default function initWorkerController() {
       user_id: 1,
       username: 'chee_kean',
       real_name: 'Chee Kean',
-      org_id: 1,
+      organisation_id: 1,
       role: 'worker',
       remainder_leaves: 5,
       remainder_shifts: 2,

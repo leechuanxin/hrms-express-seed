@@ -40,7 +40,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      org_id: {
+      organisation_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {

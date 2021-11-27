@@ -22,7 +22,7 @@ export default function initUserModel(sequelize, DataTypes) {
         allowNull: false,
         is: /^[0-9a-f]{64}$/i,
       },
-      orgId: {
+      organisationId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
