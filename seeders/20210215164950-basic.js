@@ -1,54 +1,67 @@
-'use strict';
+const jssha = require('jssha');
 
-const difficulties = [1,2,3,4,5.0,5.1,5.2,5.3,5.4,5.5,5.6,5.7,5.8,5.9,5.10,5.11,5.12,5.13,5.14,5.15];
+const { SALT } = process.env;
 
-var faker = require('faker');
+function getHash(input) {
+  // eslint-disable-next-line new-cap
+  const shaObj = new jssha('SHA-512', 'TEXT', { encoding: 'UTF8' });
+  const unhasedString = `${input}-${SALT}`;
+  shaObj.update(unhasedString);
+
+  return shaObj.getHash('HEX');
+}
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-     const tripsList = [
+  up: async (queryInterface) => {
+    await queryInterface.bulkInsert('organisations', [
       {
-        name: 'krabi',
+        name: 'Rocket Industries',
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+    ]);
+    await queryInterface.bulkInsert('users', [
+      {
+        username: 'admin',
+        real_name: 'Neo Kai Yuan',
+        password: getHash('testuser123'),
+        org_id: 1,
+        role: 'admin',
+        wage: 10000.00,
+        remaining_leaves: 0,
+        remaining_shifts: 0,
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        name: 'yosemite',
+        username: 'chee_kean',
+        real_name: 'Chee Kean',
+        password: getHash('testuser123'),
+        org_id: 1,
+        role: 'worker',
+        wage: 1500.00,
+        remaining_leaves: 3,
+        remaining_shifts: 3,
         created_at: new Date(),
         updated_at: new Date(),
       },
-    ];
-
-    // Insert categories before items because items reference categories
-    let trips = await queryInterface.bulkInsert(
-      'trips',
-      tripsList,
-      { returning: true }
-    );
-
-    const routes = [];
-
-    for (let i = 0; i < trips.length; i++) {
-      const trip = trips[i];
-
-      for (let i = 0; i < 15; i++) {
-        var noun = faker.company.bsNoun(); // Rowan Nikolaus
-        var adjective = faker.commerce.productAdjective(); // Rowan Nikolaus
-        var difficulty = difficulties[Math.floor(Math.random() * difficulties.length)];
-
-        routes.push({
-          name: `${adjective} ${noun}`,
-          trip_id: trip.id,
-          difficulty,
-          created_at: new Date(),
-          updated_at: new Date(),
-        });
-
-      }
-    }
-
-    queryInterface.bulkInsert('routes', routes);
+      {
+        username: 'chuan_xin',
+        real_name: 'Chuan Xin',
+        password: getHash('testuser123'),
+        org_id: 1,
+        role: 'worker',
+        wage: 1500.00,
+        remaining_leaves: 3,
+        remaining_shifts: 3,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+    ]);
   },
-
-  down: async (queryInterface, Sequelize) => {}
+  // to create default world json here
+  down: async (queryInterface) => {
+    await queryInterface.bulkDelete('users', null, {});
+    await queryInterface.bulkDelete('organisations', null, {});
+  },
 };

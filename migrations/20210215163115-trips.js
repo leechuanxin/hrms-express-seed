@@ -1,8 +1,6 @@
-'use strict';
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-     await queryInterface.createTable('trips', {
+    await queryInterface.createTable('organisations', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,50 +8,75 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       name: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(64),
+        allowNull: false,
       },
       created_at: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
       },
       updated_at: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
       },
     });
-    await queryInterface.createTable('routes', {
+
+    await queryInterface.createTable('users', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
-        type: Sequelize.STRING,
-      },
-      difficulty: {
-        type: Sequelize.STRING,
-      },
-      created_at: {
+      username: {
+        type: Sequelize.STRING(64),
         allowNull: false,
-        type: Sequelize.DATE,
       },
-      updated_at: {
+      real_name: {
+        type: Sequelize.STRING(64),
         allowNull: false,
-        type: Sequelize.DATE,
       },
-      trip_id: {
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      org_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
-          model: 'trips',
+          model: 'organisations',
           key: 'id',
         },
+      },
+      role: {
+        type: Sequelize.STRING(64),
+        allowNull: false,
+      },
+      wage: {
+        type: Sequelize.DECIMAL(7, 2),
+        allowNull: false,
+      },
+      remaining_leaves: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      remaining_shifts: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
       },
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('trips');
-    await queryInterface.dropTable('routes');
-  }
+  down: async (queryInterface) => {
+    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('organisations');
+  },
 };

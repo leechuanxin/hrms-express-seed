@@ -2,8 +2,8 @@ import { Sequelize } from 'sequelize';
 import url from 'url';
 import allConfig from '../config/config.js';
 
-import initRouteModel from './route.mjs';
-import initTripModel from './trip.mjs';
+import initOrganisationModel from './organisation.mjs';
+import initUserModel from './user.mjs';
 
 const env = process.env.NODE_ENV || 'development';
 const config = allConfig[env];
@@ -35,10 +35,10 @@ else {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.Route = initRouteModel(sequelize, Sequelize.DataTypes);
-db.Trip = initTripModel(sequelize, Sequelize.DataTypes);
+db.Organisation = initOrganisationModel(sequelize, Sequelize.DataTypes);
+db.User = initUserModel(sequelize, Sequelize.DataTypes);
 
-db.Route.belongsTo(db.Trip);
-db.Trip.hasMany(db.Route);
+db.User.belongsTo(db.Organisation);
+db.Organisation.hasMany(db.User);
 
 export default db;
