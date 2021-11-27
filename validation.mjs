@@ -38,15 +38,26 @@ const validateUserDescription = (userInfo) => {
 
 const validatePassword = (userInfo, type) => {
   const obj = {};
-  if (!userInfo.password || userInfo.password.trim === '') {
-    if (type === 'login') {
+  if (type === 'login') {
+    if (!userInfo.password || userInfo.password.trim === '') {
       obj.password_invalid = 'Please type in your password.';
     }
   }
 
-  if (!userInfo.password || userInfo.password.trim === '' || userInfo.password.length < 8) {
+  if (type === 'signup') {
+    if (!userInfo.password1 || userInfo.password1.trim === '' || userInfo.password1.length < 8) {
+      obj.password1_invalid = 'Please enter a valid password of at least 8 characters long.';
+    }
+  }
+
+  return obj;
+};
+
+const validatePassword2 = (userInfo, type) => {
+  const obj = {};
+  if (userInfo.password1 !== userInfo.password2) {
     if (type === 'signup') {
-      obj.password_invalid = 'Please enter a valid password of at least 8 characters long.';
+      obj.password2_invalid = 'Please ensure that the passwords you have typed in for the 2 fields above are the same!';
     }
   }
   return obj;
@@ -57,7 +68,7 @@ export const validateUserInfo = (userInfo) => ({
   ...validateRealName(userInfo, 'signup'),
   ...validateUserName(userInfo, 'signup'),
   ...validatePassword(userInfo, 'signup'),
-  ...validateUserDescription(userInfo),
+  ...validatePassword2(userInfo, 'signup'),
 });
 
 export const validateUserSettings = (userInfo) => ({
