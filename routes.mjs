@@ -21,6 +21,7 @@ export default function bindRoutes(app) {
   // Worker
   app.get('/api/worker/:workerId/year/:year/month/:month/schedule', EventsController.showWorkerEventsByMonth);
   app.post('/api/worker/:workerId/event', EventsController.workerCreate);
+  app.put('/api/worker/:workerId/event/:eventId', EventsController.workerEdit);
   app.delete('/api/worker/:workerId/event/:eventId', EventsController.workerDelete);
 
   app.get('/trips', TripsController.index);

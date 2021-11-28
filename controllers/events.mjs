@@ -253,11 +253,124 @@ export default function initEventsController(db) {
     }
   };
 
+  const workerEdit = async (request, response) => {
+    try {
+      const { organisationId, type, dateAt } = request.body;
+      let newObj = {};
+      const user = await db.User.findOne({
+        where: {
+          [db.Sequelize.Op.and]: [
+            { id: request.params.workerId },
+            { role: 'worker' },
+          ],
+        },
+      });
+
+      if (!user) {
+        // we didnt find a user with that email.
+        // the error for password and user are the same.
+        // don't tell the user which error they got for security reasons,
+        // otherwise people can guess if a person is a user of a given service.
+        throw new Error(globals.WORKER_NOT_FOUND);
+      }
+
+      const prevMonth = (request.params.month === 0) ? 11 : request.params.month - 1;
+
+      newObj = {
+        ...user.dataValues,
+        userId: user.id,
+        token: util.getHash(user.id),
+        month: Number(request.params.month),
+        prev_month: prevMonth,
+        year: Number(request.params.year),
+      };
+
+      delete newObj.password;
+      delete newObj.id;
+      delete newObj.createdAt;
+      delete newObj.updatedAt;
+      delete newObj.wage;
+
+      const event = await db.Event.findOne({
+        where: {
+          [db.Sequelize.Op.and]: [
+            { id: request.params.eventId },
+            { userId: request.params.workerId },
+          ],
+        },
+      });
+
+      if (!event) {
+        // we didnt find a user with that email.
+        // the error for password and user are the same.
+        // don't tell the user which error they got for security reasons,
+        // otherwise people can guess if a person is a user of a given service.
+        throw new Error(globals.EVENT_NOT_FOUND);
+      }
+
+      let modifiedEvent = await db.Event.update(
+        {
+          organisationId,
+          userId: request.params.workerId,
+          type,
+          dateAt,
+          createdAt: event.dataValues.createdAt,
+          updatedAt: new Date(),
+        },
+        {
+          where: {
+            [db.Sequelize.Op.and]: [
+              { id: request.params.eventId },
+              { userId: request.params.workerId },
+            ],
+          },
+          returning: true,
+        },
+      );
+
+      modifiedEvent = {
+        ...modifiedEvent[1][0].dataValues,
+      };
+
+      modifiedEvent = {
+        ...modifiedEvent,
+        title: modifiedEvent.type.charAt(0).toUpperCase()
+          + modifiedEvent.type.substring(1),
+        extendedProps: {
+          id: modifiedEvent.id,
+          userId: modifiedEvent.userId,
+          realName: newObj.realName,
+          type: modifiedEvent.type,
+          title: modifiedEvent.type.charAt(0).toUpperCase()
+            + modifiedEvent.type.substring(1),
+        },
+      };
+
+      const successMessage = `Successful editing of event ID ${request.params.eventId} for worker ID ${request.params.workerId}!`;
+      response.send({
+        success: true,
+        message: successMessage,
+        modifiedEvent,
+      });
+    } catch (error) {
+      const errorMessage = error.message;
+
+      const resObj = {
+        isError: true,
+        error: errorMessage,
+        message: errorMessage,
+        ...request.params,
+      };
+      response.send(resObj);
+    }
+  };
+
   // return all methods we define in an object
   // refer to the routes file above to see this used
   return {
     showWorkerEventsByMonth,
     workerCreate,
     workerDelete,
+    workerEdit,
   };
 }
