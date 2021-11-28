@@ -206,10 +206,58 @@ export default function initEventsController(db) {
     }
   };
 
+  const workerDelete = async (request, response) => {
+    try {
+      const event = await db.Event.findOne({
+        where: {
+          [db.Sequelize.Op.and]: [
+            { id: request.params.eventId },
+            { userId: request.params.workerId },
+          ],
+        },
+      });
+
+      if (!event) {
+        // we didnt find a user with that email.
+        // the error for password and user are the same.
+        // don't tell the user which error they got for security reasons,
+        // otherwise people can guess if a person is a user of a given service.
+        throw new Error(globals.EVENT_NOT_FOUND);
+      }
+
+      await db.Event.destroy({
+        where: {
+          [db.Sequelize.Op.and]: [
+            { id: request.params.eventId },
+            { userId: request.params.workerId },
+          ],
+        },
+      });
+
+      const successMessage = `Successful deletion of event ID ${request.params.eventId} for worker ID ${request.params.workerId}!`;
+      response.send({
+        success: true,
+        message: successMessage,
+        eventId: request.params.eventId,
+      });
+    } catch (error) {
+      const errorMessage = error.message;
+
+      const resObj = {
+        isError: true,
+        error: errorMessage,
+        message: errorMessage,
+        ...request.params,
+      };
+      response.send(resObj);
+    }
+  };
+
   // return all methods we define in an object
   // refer to the routes file above to see this used
   return {
     showWorkerEventsByMonth,
     workerCreate,
+    workerDelete,
   };
 }
