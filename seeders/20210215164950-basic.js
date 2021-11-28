@@ -58,9 +58,63 @@ module.exports = {
         updated_at: new Date(),
       },
     ]);
+
+    await queryInterface.bulkInsert('events', [
+      {
+        user_id: 2,
+        organisation_id: 1,
+        type: 'leave',
+        date_at: new Date('2021-12-24'),
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 2,
+        organisation_id: 1,
+        type: 'leave',
+        date_at: new Date('2021-12-27'),
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 2,
+        organisation_id: 1,
+        type: 'leave',
+        date_at: new Date('2021-12-28'),
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 2,
+        organisation_id: 1,
+        type: 'shift',
+        date_at: new Date('2021-12-03'),
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 2,
+        organisation_id: 1,
+        type: 'shift',
+        date_at: new Date('2021-12-08'),
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 2,
+        organisation_id: 1,
+        type: 'shift',
+        date_at: new Date('2021-12-23'),
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+    ]);
   },
   // to create default world json here
   down: async (queryInterface) => {
+    // drop events before users, because events have foreign keys in users and orgs
+    await queryInterface.bulkDelete('events', null, {});
+    // drop users before orgs, because users have foreign keys in orgs
     await queryInterface.bulkDelete('users', null, {});
     await queryInterface.bulkDelete('organisations', null, {});
   },

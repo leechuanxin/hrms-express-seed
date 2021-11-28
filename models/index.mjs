@@ -4,6 +4,7 @@ import allConfig from '../config/config.js';
 
 import initOrganisationModel from './organisation.mjs';
 import initUserModel from './user.mjs';
+import initEventModel from './event.mjs';
 
 const env = process.env.NODE_ENV || 'development';
 const config = allConfig[env];
@@ -37,8 +38,15 @@ db.Sequelize = Sequelize;
 
 db.Organisation = initOrganisationModel(sequelize, Sequelize.DataTypes);
 db.User = initUserModel(sequelize, Sequelize.DataTypes);
+db.Event = initEventModel(sequelize, Sequelize.DataTypes);
 
 db.User.belongsTo(db.Organisation);
 db.Organisation.hasMany(db.User);
+
+db.Event.belongsTo(db.Organisation);
+db.Organisation.hasMany(db.Event);
+
+db.Event.belongsTo(db.User);
+db.User.hasMany(db.Event);
 
 export default db;

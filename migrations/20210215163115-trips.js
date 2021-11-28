@@ -73,9 +73,52 @@ module.exports = {
         allowNull: false,
       },
     });
+
+    await queryInterface.createTable('events', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'users',
+          key: 'id',
+        },
+      },
+      organisation_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'organisations',
+          key: 'id',
+        },
+      },
+      type: {
+        type: Sequelize.STRING(64),
+        allowNull: false,
+      },
+      date_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+    });
   },
 
   down: async (queryInterface) => {
+    // drop events first, since it has foreign keys in users and orgs
+    await queryInterface.dropTable('events');
     await queryInterface.dropTable('users');
     await queryInterface.dropTable('organisations');
   },
