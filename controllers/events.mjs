@@ -220,14 +220,14 @@ export default function initEventsController(db) {
 
         const monthsLeft = 11 - Number(firstOfMonthDate.getMonth()) + 1;
 
-        if ((workerObj.remainingShifts / monthsLeft) >= 15) {
+        if ((workerObj.remainingShifts / monthsLeft) >= ((260 - 14) / 16)) {
           workerObj = {
             ...workerObj,
             remainingShiftsStatus: 'danger',
           };
         } else if (
-          (workerObj.remainingShifts / monthsLeft) < 15
-          && (workerObj.remainingShifts / monthsLeft) >= 5
+          (workerObj.remainingShifts / monthsLeft) < ((260 - 14) / 16)
+          && (workerObj.remainingShifts / monthsLeft) >= ((260 - 14) / 49)
         ) {
           workerObj = {
             ...workerObj,
