@@ -24,5 +24,8 @@ export default function bindRoutes(app) {
   app.put('/api/worker/:workerId/event/:eventId', EventsController.workerEdit);
   app.delete('/api/worker/:workerId/event/:eventId', EventsController.workerDelete);
 
+  // Admin
+  app.get('/api/admin/:adminId/year/:year/month/:month/schedule', EventsController.showAdminEventsByMonth);
+
   app.get('/trips', TripsController.index);
 }
