@@ -117,9 +117,99 @@ export default function initEventsController(db) {
     }
   };
 
+  const workerCreate = async (request, response) => {
+    const {
+      userId, organisationId, type, dateAt, createdAt, updatedAt,
+    } = request.body;
+
+    const firstOfMonthDate = new Date(`${request.params.year}-${Number(request.params.month) + 1}-1`);
+    const firstOfMonthString = util.getMonthString(firstOfMonthDate);
+    try {
+      let newObj = {};
+      const user = await db.User.findOne({
+        where: {
+          [db.Sequelize.Op.and]: [
+            { id: userId },
+            { role: 'worker' },
+          ],
+        },
+      });
+
+      if (!user) {
+        // we didnt find a user with that email.
+        // the error for password and user are the same.
+        // don't tell the user which error they got for security reasons,
+        // otherwise people can guess if a person is a user of a given service.
+        throw new Error(globals.WORKER_NOT_FOUND);
+      }
+
+      const prevMonth = (request.params.month === 0) ? 11 : request.params.month - 1;
+
+      newObj = {
+        ...user.dataValues,
+        userId: user.id,
+        token: util.getHash(user.id),
+        month: Number(request.params.month),
+        prev_month: prevMonth,
+        year: Number(request.params.year),
+      };
+
+      delete newObj.password;
+      delete newObj.id;
+      delete newObj.createdAt;
+      delete newObj.updatedAt;
+      delete newObj.wage;
+
+      let newEvent = await db.Event.create({
+        userId,
+        organisationId,
+        type,
+        dateAt,
+        createdAt,
+        updatedAt,
+      });
+
+      newEvent = {
+        ...newEvent.dataValues,
+      };
+
+      const dateNumberStr = `${newEvent.dateAt.getDate()}`;
+
+      newEvent = {
+        ...newEvent,
+        title: newEvent.type.charAt(0).toUpperCase()
+          + newEvent.type.substring(1),
+        extendedProps: {
+          id: newEvent.id,
+          userId: newEvent.userId,
+          realName: newObj.realName,
+          type: newEvent.type,
+          title: newEvent.type.charAt(0).toUpperCase()
+            + newEvent.type.substring(1),
+        },
+      };
+
+      const successMessage = `Successful creation of new event for worker ID ${request.params.workerId}'s preferred schedule on ${firstOfMonthString} ${dateNumberStr}!`;
+      response.send({
+        message: successMessage,
+        newEvent,
+      });
+    } catch (error) {
+      const errorMessage = error.message;
+
+      const resObj = {
+        error: errorMessage,
+        message: errorMessage,
+        ...request.params,
+      };
+      response.send(resObj);
+    }
+  };
+
   // return all methods we define in an object
   // refer to the routes file above to see this used
   return {
     showWorkerEventsByMonth,
+    workerCreate,
   };
 }

@@ -18,6 +18,9 @@ export default function bindRoutes(app) {
   app.post('/api/login/', LoginController.create);
   app.post('/api/dj-rest-auth/registration', SignupController.create);
 
+  // Worker
   app.get('/api/worker/:workerId/year/:year/month/:month/schedule', EventsController.showWorkerEventsByMonth);
+  app.post('/api/worker/:workerId/schedule', EventsController.workerCreate);
+
   app.get('/trips', TripsController.index);
 }

@@ -22,9 +22,6 @@ export default function initLoginController(db) {
         },
       });
 
-      console.log('after await:');
-      console.log(user);
-
       if (!user) {
         // we didnt find a user with that email.
         // the error for password and user are the same.
@@ -32,9 +29,6 @@ export default function initLoginController(db) {
         // otherwise people can guess if a person is a user of a given service.
         throw new Error(globals.LOGIN_FAILED_ERROR_MESSAGE);
       }
-
-      console.log('after check user exists');
-      console.log(user);
 
       const successMessage = 'Login success!';
       response.send({
@@ -60,8 +54,6 @@ export default function initLoginController(db) {
         message: errorMessage,
         ...validatedLogin,
       };
-      console.log('resObj error:');
-      console.log(resObj);
       delete resObj.password;
       response.send(resObj);
     }
