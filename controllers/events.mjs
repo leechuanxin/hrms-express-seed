@@ -196,14 +196,14 @@ export default function initEventsController(db) {
 
           const eventObj = {
             ...event.dataValues,
-            title: `${eventUser.dataValues.realName}'s ${event.dataValues.type.charAt(0).toUpperCase()}${event.dataValues.type.substring(1)}`,
+            title: `${eventUser.dataValues.realName}`,
             date: combinedDateStr,
             extendedProps: {
               id: event.dataValues.id,
               userId: eventUser.dataValues.id,
               realName: eventUser.dataValues.realName,
               type: event.dataValues.type,
-              title: `${eventUser.dataValues.realName}'s ${event.dataValues.type.charAt(0).toUpperCase()}${event.dataValues.type.substring(1)}`,
+              title: `${eventUser.dataValues.realName}`,
               date: combinedDateStr,
             },
           };
