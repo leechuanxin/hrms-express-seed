@@ -98,12 +98,138 @@ export default function initEventsController(db) {
       const shiftDates = events.filter((event) => (event.type === 'shift'));
       const leaveDates = events.filter((event) => (event.type === 'leave'));
 
+      let schedules = await db.Schedule.findAll({
+        where: {
+          [db.Sequelize.Op.and]: [
+            { organisationId: user.organisationId },
+            {
+              startMonthDate:
+              {
+                [db.Sequelize.Op.and]: [
+                  { [db.Sequelize.Op.gte]: firstOfMonthDate },
+                  { [db.Sequelize.Op.lt]: firstOfNextMonthDate },
+                ],
+              },
+            },
+          ],
+        },
+      });
+
+      let scheduleSelected = false;
+
+      let optimisedSchedule = await db.Schedule.findOne({
+        where: {
+          [db.Sequelize.Op.and]: [
+            { organisationId: user.organisationId },
+            { isSelected: true },
+            {
+              startMonthDate:
+              {
+                [db.Sequelize.Op.and]: [
+                  { [db.Sequelize.Op.gte]: firstOfMonthDate },
+                  { [db.Sequelize.Op.lt]: firstOfNextMonthDate },
+                ],
+              },
+            },
+          ],
+        },
+      });
+
+      if (optimisedSchedule) {
+        scheduleSelected = true;
+        optimisedSchedule = await optimisedSchedule.getOptimisations();
+        optimisedSchedule = await Promise.all(
+          optimisedSchedule.map(async (optimisation) => {
+            const eventUser = await optimisation.getUser();
+            let monthNumberStr = `${Number(request.params.month) + 1}`;
+            let dateNumberStr = `${(new Date(optimisation.dataValues.dateAt)).getDate()}`;
+
+            if (monthNumberStr < 2) {
+              monthNumberStr = `0${monthNumberStr}`;
+            }
+
+            if (dateNumberStr.length < 2) {
+              dateNumberStr = `0${dateNumberStr}`;
+            }
+
+            const combinedDateStr = `${request.params.year}-${monthNumberStr}-${dateNumberStr}`;
+
+            const optimisationObj = {
+              ...optimisation.dataValues,
+              title: `${eventUser.dataValues.realName}`,
+              date: combinedDateStr,
+              extendedProps: {
+                id: optimisation.dataValues.id,
+                userId: eventUser.dataValues.id,
+                realName: eventUser.dataValues.realName,
+                type: optimisation.dataValues.type,
+                title: `${eventUser.dataValues.realName}`,
+                date: combinedDateStr,
+              },
+            };
+            return {
+              ...optimisationObj,
+            };
+          }),
+        );
+      }
+
+      schedules = await Promise.all(
+        schedules.map(async (schedule) => {
+          let optimisations = await schedule.getOptimisations();
+          optimisations = await Promise.all(
+            optimisations.map(async (optimisation) => {
+              const eventUser = await optimisation.getUser();
+              let monthNumberStr = `${Number(request.params.month) + 1}`;
+              let dateNumberStr = `${(new Date(optimisation.dataValues.dateAt)).getDate()}`;
+
+              if (monthNumberStr < 2) {
+                monthNumberStr = `0${monthNumberStr}`;
+              }
+
+              if (dateNumberStr.length < 2) {
+                dateNumberStr = `0${dateNumberStr}`;
+              }
+
+              const combinedDateStr = `${request.params.year}-${monthNumberStr}-${dateNumberStr}`;
+
+              const optimisationObj = {
+                ...optimisation.dataValues,
+                title: `${eventUser.dataValues.realName}`,
+                date: combinedDateStr,
+                extendedProps: {
+                  id: optimisation.dataValues.id,
+                  userId: eventUser.dataValues.id,
+                  realName: eventUser.dataValues.realName,
+                  type: optimisation.dataValues.type,
+                  title: `${eventUser.dataValues.realName}`,
+                  date: combinedDateStr,
+                },
+              };
+              return {
+                ...optimisationObj,
+              };
+            }),
+          );
+          const scheduleObj = {
+            ...schedule.dataValues,
+            optimisations,
+          };
+          return {
+            ...scheduleObj,
+          };
+        }),
+      );
+
       const successMessage = `Successful retrieval of worker ID ${request.params.workerId}'s preferred schedule on ${firstOfMonthString} ${request.params.year}!`;
       response.send({
         message: successMessage,
         ...newObj,
         shiftDates,
         leaveDates,
+        schedules,
+        scheduleSelected,
+        optimisedSchedule,
       });
     } catch (error) {
       const errorMessage = error.message;
