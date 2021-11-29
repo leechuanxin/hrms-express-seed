@@ -684,6 +684,98 @@ export default function initOptimisationsController(db) {
     }
   };
 
+  const create = async (request, response) => {
+    const {
+      adminId, userId, scheduleId, organisationId, type, dateAt, createdAt, updatedAt,
+    } = request.body;
+
+    try {
+      let newObj = {};
+      const admin = await db.User.findOne({
+        where: {
+          [db.Sequelize.Op.and]: [
+            { id: adminId },
+            { role: 'admin' },
+          ],
+        },
+      });
+
+      if (!admin) {
+        // we didnt find a user with that email.
+        // the error for password and user are the same.
+        // don't tell the user which error they got for security reasons,
+        // otherwise people can guess if a person is a user of a given service.
+        throw new Error(globals.ADMIN_NOT_FOUND);
+      }
+
+      const prevMonth = (request.params.month === 0) ? 11 : request.params.month - 1;
+
+      newObj = {
+        ...admin.dataValues,
+        userId: admin.id,
+        token: util.getHash(admin.id),
+        month: Number(request.params.month),
+        prev_month: prevMonth,
+        year: Number(request.params.year),
+      };
+
+      delete newObj.password;
+      delete newObj.id;
+      delete newObj.createdAt;
+      delete newObj.updatedAt;
+      delete newObj.wage;
+
+      let newEvent = await db.Optimisation.create({
+        userId,
+        organisationId,
+        scheduleId,
+        type,
+        dateAt,
+        createdAt,
+        updatedAt,
+      });
+
+      newEvent = {
+        ...newEvent.dataValues,
+      };
+
+      const newOptimisation = await db.Optimisation.findOne({
+        where: {
+          id: newEvent.id,
+        },
+      });
+
+      const eventUser = await newOptimisation.getUser();
+
+      newEvent = {
+        ...newEvent,
+        title: eventUser.dataValues.realName,
+        extendedProps: {
+          id: newEvent.id,
+          userId: eventUser.dataValues.id,
+          realName: eventUser.dataValues.realName,
+          type: newEvent.type,
+          title: eventUser.dataValues.realName,
+        },
+      };
+
+      const successMessage = `Successful creation of new optimisation for worker ID ${request.params.userId} by ${request.params.adminId}!`;
+      response.send({
+        message: successMessage,
+        newEvent,
+      });
+    } catch (error) {
+      const errorMessage = error.message;
+
+      const resObj = {
+        error: errorMessage,
+        message: errorMessage,
+        ...request.params,
+      };
+      response.send(resObj);
+    }
+  };
+
   // return all methods we define in an object
   // refer to the routes file above to see this used
   return {
@@ -691,5 +783,6 @@ export default function initOptimisationsController(db) {
     select,
     edit,
     adminDelete,
+    create,
   };
 }
