@@ -530,10 +530,126 @@ export default function initOptimisationsController(db) {
     }
   };
 
+  const edit = async (request, response) => {
+    try {
+      const {
+        workerId, organisationId, type, dateAt,
+      } = request.body;
+      let newObj = {};
+      const user = await db.User.findOne({
+        where: {
+          [db.Sequelize.Op.and]: [
+            { id: request.params.adminId },
+            { role: 'admin' },
+          ],
+        },
+      });
+
+      if (!user) {
+        // we didnt find a user with that email.
+        // the error for password and user are the same.
+        // don't tell the user which error they got for security reasons,
+        // otherwise people can guess if a person is a user of a given service.
+        throw new Error(globals.ADMIN_NOT_FOUND);
+      }
+
+      const prevMonth = (request.params.month === 0) ? 11 : request.params.month - 1;
+
+      newObj = {
+        ...user.dataValues,
+        userId: user.id,
+        token: util.getHash(user.id),
+        month: Number(request.params.month),
+        prev_month: prevMonth,
+        year: Number(request.params.year),
+      };
+
+      delete newObj.password;
+      delete newObj.id;
+      delete newObj.createdAt;
+      delete newObj.updatedAt;
+      delete newObj.wage;
+
+      const optimisation = await db.Optimisation.findOne({
+        where: {
+          id: request.params.optimisationId,
+        },
+      });
+
+      if (!optimisation) {
+        // we didnt find a user with that email.
+        // the error for password and user are the same.
+        // don't tell the user which error they got for security reasons,
+        // otherwise people can guess if a person is a user of a given service.
+        throw new Error(globals.EVENT_NOT_FOUND);
+      }
+
+      let modifiedEvent = await db.Optimisation.update(
+        {
+          scheduleId: optimisation.dataValues.scheduleId,
+          organisationId,
+          userId: (workerId === 0) ? optimisation.dataValues.userId : workerId,
+          type,
+          dateAt,
+          createdAt: optimisation.dataValues.createdAt,
+          updatedAt: new Date(),
+        },
+        {
+          where: {
+            id: request.params.optimisationId,
+          },
+          returning: true,
+        },
+      );
+
+      modifiedEvent = {
+        ...modifiedEvent[1][0].dataValues,
+      };
+
+      const newOptimisation = await db.Optimisation.findOne({
+        where: {
+          id: request.params.optimisationId,
+        },
+      });
+
+      const eventUser = await newOptimisation.getUser();
+
+      modifiedEvent = {
+        ...modifiedEvent,
+        title: eventUser.dataValues.realName,
+        extendedProps: {
+          id: modifiedEvent.id,
+          userId: eventUser.dataValues.id,
+          realName: eventUser.dataValues.realName,
+          type: modifiedEvent.type,
+          title: eventUser.dataValues.realName,
+        },
+      };
+
+      const successMessage = `Successful editing of optimisation ID ${request.params.optimisationId} for admin ID ${request.params.adminId}!`;
+      response.send({
+        success: true,
+        message: successMessage,
+        modifiedEvent,
+      });
+    } catch (error) {
+      const errorMessage = error.message;
+
+      const resObj = {
+        isError: true,
+        error: errorMessage,
+        message: errorMessage,
+        ...request.params,
+      };
+      response.send(resObj);
+    }
+  };
+
   // return all methods we define in an object
   // refer to the routes file above to see this used
   return {
     show,
     select,
+    edit,
   };
 }
