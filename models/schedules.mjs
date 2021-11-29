@@ -1,6 +1,6 @@
-export default function initOptimisationModel(sequelize, DataTypes) {
+export default function initScheduleModel(sequelize, DataTypes) {
   return sequelize.define(
-    'optimisation',
+    'schedule',
     {
       id: {
         allowNull: false,

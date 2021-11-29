@@ -115,7 +115,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable('optimisations', {
+    await queryInterface.createTable('schedules', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -148,18 +148,26 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable('optimised_events', {
+    await queryInterface.createTable('optimisations', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      optimisation_id: {
+      schedule_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'optimisations',
+          model: 'schedules',
+          key: 'id',
+        },
+      },
+      organisation_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'organisations',
           key: 'id',
         },
       },
@@ -191,8 +199,8 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('optimised_events');
     await queryInterface.dropTable('optimisations');
+    await queryInterface.dropTable('schedules');
     // drop events first, since it has foreign keys in users and orgs
     await queryInterface.dropTable('events');
     await queryInterface.dropTable('users');

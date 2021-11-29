@@ -5,8 +5,8 @@ import allConfig from '../config/config.js';
 import initOrganisationModel from './organisation.mjs';
 import initUserModel from './user.mjs';
 import initEventModel from './event.mjs';
-import initOptimisationModel from './optimisation.mjs';
-import initOptimisedEventModel from './optimised_event.mjs';
+import initScheduleModel from './schedules.mjs';
+import initOptimisationModel from './optimisations.mjs';
 
 const env = process.env.NODE_ENV || 'development';
 const config = allConfig[env];
@@ -41,24 +41,25 @@ db.Sequelize = Sequelize;
 db.Organisation = initOrganisationModel(sequelize, Sequelize.DataTypes);
 db.User = initUserModel(sequelize, Sequelize.DataTypes);
 db.Event = initEventModel(sequelize, Sequelize.DataTypes);
+db.Schedule = initScheduleModel(sequelize, Sequelize.DataTypes);
 db.Optimisation = initOptimisationModel(sequelize, Sequelize.DataTypes);
-db.OptimisedEvent = initOptimisedEventModel(sequelize, Sequelize.DataTypes);
 
 db.User.belongsTo(db.Organisation);
 db.Organisation.hasMany(db.User);
 
 db.Event.belongsTo(db.Organisation);
 db.Organisation.hasMany(db.Event);
-
 db.Event.belongsTo(db.User);
 db.User.hasMany(db.Event);
 
+db.Schedule.belongsTo(db.Organisation);
+db.Organisation.hasMany(db.Schedule);
+
 db.Optimisation.belongsTo(db.Organisation);
 db.Organisation.hasMany(db.Optimisation);
-
-db.OptimisedEvent.belongsTo(db.Organisation);
-db.Organisation.hasMany(db.OptimisedEvent);
-db.OptimisedEvent.belongsTo(db.Optimisation);
-db.Optimisation.hasMany(db.OptimisedEvent);
+db.Optimisation.belongsTo(db.Schedule);
+db.Schedule.hasMany(db.Optimisation);
+db.Optimisation.belongsTo(db.User);
+db.User.hasMany(db.Optimisation);
 
 export default db;

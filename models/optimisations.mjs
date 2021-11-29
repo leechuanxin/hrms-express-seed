@@ -1,6 +1,6 @@
-export default function initOptimisedEventModel(sequelize, DataTypes) {
+export default function initOptimisationsModel(sequelize, DataTypes) {
   return sequelize.define(
-    'optimisedEvent',
+    'optimisation',
     {
       id: {
         allowNull: false,
@@ -8,9 +8,13 @@ export default function initOptimisedEventModel(sequelize, DataTypes) {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      isSelected: {
-        type: DataTypes.BOOLEAN,
+      scheduleId: {
+        type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+          model: 'schedules',
+          key: 'id',
+        },
       },
       organisationId: {
         type: DataTypes.INTEGER,

@@ -513,7 +513,7 @@ module.exports = {
       },
     ]);
 
-    await queryInterface.bulkInsert('optimisations', [
+    await queryInterface.bulkInsert('schedules', [
       {
         is_selected: false,
         organisation_id: 1,
@@ -537,10 +537,10 @@ module.exports = {
       },
     ]);
 
-    await queryInterface.bulkInsert('optimised_events', [
+    await queryInterface.bulkInsert('optimisations', [
       // Chee Kean
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 2,
         organisation_id: 1,
         type: 'leave',
@@ -549,7 +549,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 2,
         organisation_id: 1,
         type: 'leave',
@@ -558,7 +558,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 2,
         organisation_id: 1,
         type: 'leave',
@@ -567,7 +567,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 2,
         organisation_id: 1,
         type: 'shift',
@@ -576,7 +576,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 2,
         organisation_id: 1,
         type: 'shift',
@@ -585,7 +585,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 2,
         organisation_id: 1,
         type: 'shift',
@@ -595,7 +595,7 @@ module.exports = {
       },
       // Susan Chan
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 3,
         organisation_id: 1,
         type: 'leave',
@@ -604,7 +604,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 3,
         organisation_id: 1,
         type: 'leave',
@@ -613,7 +613,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 3,
         organisation_id: 1,
         type: 'leave',
@@ -622,7 +622,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 3,
         organisation_id: 1,
         type: 'shift',
@@ -631,7 +631,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 3,
         organisation_id: 1,
         type: 'shift',
@@ -640,7 +640,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 3,
         organisation_id: 1,
         type: 'shift',
@@ -650,7 +650,7 @@ module.exports = {
       },
       // Akira Wong
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 4,
         organisation_id: 1,
         type: 'leave',
@@ -659,7 +659,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 4,
         organisation_id: 1,
         type: 'leave',
@@ -668,7 +668,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 4,
         organisation_id: 1,
         type: 'leave',
@@ -677,7 +677,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 4,
         organisation_id: 1,
         type: 'shift',
@@ -686,7 +686,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 4,
         organisation_id: 1,
         type: 'shift',
@@ -695,7 +695,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 4,
         organisation_id: 1,
         type: 'shift',
@@ -705,7 +705,7 @@ module.exports = {
       },
       // Justin Wong
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 5,
         organisation_id: 1,
         type: 'leave',
@@ -714,7 +714,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 5,
         organisation_id: 1,
         type: 'leave',
@@ -723,7 +723,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 5,
         organisation_id: 1,
         type: 'leave',
@@ -732,7 +732,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 5,
         organisation_id: 1,
         type: 'shift',
@@ -741,7 +741,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 5,
         organisation_id: 1,
         type: 'shift',
@@ -750,7 +750,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 5,
         organisation_id: 1,
         type: 'shift',
@@ -760,7 +760,7 @@ module.exports = {
       },
       // Chiew Jia En
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 6,
         organisation_id: 1,
         type: 'leave',
@@ -769,7 +769,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 6,
         organisation_id: 1,
         type: 'leave',
@@ -778,7 +778,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 6,
         organisation_id: 1,
         type: 'leave',
@@ -787,7 +787,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 6,
         organisation_id: 1,
         type: 'shift',
@@ -796,7 +796,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 6,
         organisation_id: 1,
         type: 'shift',
@@ -805,7 +805,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 6,
         organisation_id: 1,
         type: 'shift',
@@ -815,7 +815,7 @@ module.exports = {
       },
       // Wong Shen Nan
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 7,
         organisation_id: 1,
         type: 'leave',
@@ -824,7 +824,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 7,
         organisation_id: 1,
         type: 'leave',
@@ -833,7 +833,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 7,
         organisation_id: 1,
         type: 'leave',
@@ -842,7 +842,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 7,
         organisation_id: 1,
         type: 'shift',
@@ -851,7 +851,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 7,
         organisation_id: 1,
         type: 'shift',
@@ -860,7 +860,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 7,
         organisation_id: 1,
         type: 'shift',
@@ -870,7 +870,7 @@ module.exports = {
       },
       // Lee Chuan Xin
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -879,7 +879,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -888,7 +888,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -897,7 +897,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -906,7 +906,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -915,7 +915,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -924,7 +924,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -933,7 +933,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 8,
         organisation_id: 1,
         type: 'shift',
@@ -942,7 +942,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 8,
         organisation_id: 1,
         type: 'shift',
@@ -951,7 +951,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 8,
         organisation_id: 1,
         type: 'shift',
@@ -960,7 +960,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 8,
         organisation_id: 1,
         type: 'shift',
@@ -969,7 +969,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 1,
+        schedule_id: 1,
         user_id: 8,
         organisation_id: 1,
         type: 'shift',
@@ -978,10 +978,10 @@ module.exports = {
         updated_at: new Date(),
       },
 
-      // OPTIMISATION ID 2
+      // SCHEDULE ID 2
       // Chee Kean
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 2,
         organisation_id: 1,
         type: 'leave',
@@ -990,7 +990,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 2,
         organisation_id: 1,
         type: 'leave',
@@ -999,7 +999,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 2,
         organisation_id: 1,
         type: 'leave',
@@ -1008,7 +1008,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 2,
         organisation_id: 1,
         type: 'shift',
@@ -1017,7 +1017,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 2,
         organisation_id: 1,
         type: 'shift',
@@ -1026,7 +1026,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 2,
         organisation_id: 1,
         type: 'shift',
@@ -1036,7 +1036,7 @@ module.exports = {
       },
       // Susan Chan
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 3,
         organisation_id: 1,
         type: 'leave',
@@ -1045,7 +1045,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 3,
         organisation_id: 1,
         type: 'leave',
@@ -1054,7 +1054,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 3,
         organisation_id: 1,
         type: 'leave',
@@ -1063,7 +1063,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 3,
         organisation_id: 1,
         type: 'shift',
@@ -1072,7 +1072,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 3,
         organisation_id: 1,
         type: 'shift',
@@ -1081,7 +1081,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 3,
         organisation_id: 1,
         type: 'shift',
@@ -1091,7 +1091,7 @@ module.exports = {
       },
       // Akira Wong
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 4,
         organisation_id: 1,
         type: 'leave',
@@ -1100,7 +1100,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 4,
         organisation_id: 1,
         type: 'leave',
@@ -1109,7 +1109,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 4,
         organisation_id: 1,
         type: 'leave',
@@ -1118,7 +1118,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 4,
         organisation_id: 1,
         type: 'shift',
@@ -1127,7 +1127,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 4,
         organisation_id: 1,
         type: 'shift',
@@ -1136,7 +1136,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 4,
         organisation_id: 1,
         type: 'shift',
@@ -1146,7 +1146,7 @@ module.exports = {
       },
       // Justin Wong
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 5,
         organisation_id: 1,
         type: 'leave',
@@ -1155,7 +1155,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 5,
         organisation_id: 1,
         type: 'leave',
@@ -1164,7 +1164,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 5,
         organisation_id: 1,
         type: 'leave',
@@ -1173,7 +1173,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 5,
         organisation_id: 1,
         type: 'shift',
@@ -1182,7 +1182,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 5,
         organisation_id: 1,
         type: 'shift',
@@ -1191,7 +1191,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 5,
         organisation_id: 1,
         type: 'shift',
@@ -1201,7 +1201,7 @@ module.exports = {
       },
       // Chiew Jia En
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 6,
         organisation_id: 1,
         type: 'leave',
@@ -1210,7 +1210,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 6,
         organisation_id: 1,
         type: 'leave',
@@ -1219,7 +1219,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 6,
         organisation_id: 1,
         type: 'leave',
@@ -1228,7 +1228,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 6,
         organisation_id: 1,
         type: 'shift',
@@ -1237,7 +1237,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 6,
         organisation_id: 1,
         type: 'shift',
@@ -1246,7 +1246,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 6,
         organisation_id: 1,
         type: 'shift',
@@ -1256,7 +1256,7 @@ module.exports = {
       },
       // Wong Shen Nan
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 7,
         organisation_id: 1,
         type: 'leave',
@@ -1265,7 +1265,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 7,
         organisation_id: 1,
         type: 'leave',
@@ -1274,7 +1274,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 7,
         organisation_id: 1,
         type: 'leave',
@@ -1283,7 +1283,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 7,
         organisation_id: 1,
         type: 'shift',
@@ -1292,7 +1292,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 7,
         organisation_id: 1,
         type: 'shift',
@@ -1301,7 +1301,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 7,
         organisation_id: 1,
         type: 'shift',
@@ -1311,7 +1311,7 @@ module.exports = {
       },
       // Lee Chuan Xin
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -1320,7 +1320,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -1329,16 +1329,16 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 8,
-        organisation_id: 2,
+        organisation_id: 1,
         type: 'leave',
         date_at: new Date('2021-12-27'),
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -1347,7 +1347,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -1356,7 +1356,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -1365,7 +1365,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -1374,7 +1374,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 8,
         organisation_id: 1,
         type: 'shift',
@@ -1383,7 +1383,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 8,
         organisation_id: 1,
         type: 'shift',
@@ -1392,7 +1392,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 8,
         organisation_id: 1,
         type: 'shift',
@@ -1401,7 +1401,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 8,
         organisation_id: 1,
         type: 'shift',
@@ -1410,7 +1410,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 2,
+        schedule_id: 2,
         user_id: 8,
         organisation_id: 1,
         type: 'shift',
@@ -1422,7 +1422,7 @@ module.exports = {
       // OPTIMISATION ID 3
       // Chee Kean
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 2,
         organisation_id: 1,
         type: 'leave',
@@ -1431,7 +1431,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 2,
         organisation_id: 1,
         type: 'leave',
@@ -1440,7 +1440,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 2,
         organisation_id: 1,
         type: 'leave',
@@ -1449,7 +1449,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 2,
         organisation_id: 1,
         type: 'shift',
@@ -1458,7 +1458,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 2,
         organisation_id: 1,
         type: 'shift',
@@ -1467,7 +1467,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 2,
         organisation_id: 1,
         type: 'shift',
@@ -1477,7 +1477,7 @@ module.exports = {
       },
       // Susan Chan
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 3,
         organisation_id: 1,
         type: 'leave',
@@ -1486,7 +1486,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 3,
         organisation_id: 1,
         type: 'leave',
@@ -1495,7 +1495,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 3,
         organisation_id: 1,
         type: 'leave',
@@ -1504,7 +1504,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 3,
         organisation_id: 1,
         type: 'shift',
@@ -1513,7 +1513,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 3,
         organisation_id: 1,
         type: 'shift',
@@ -1522,7 +1522,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 3,
         organisation_id: 1,
         type: 'shift',
@@ -1532,7 +1532,7 @@ module.exports = {
       },
       // Akira Wong
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 4,
         organisation_id: 1,
         type: 'leave',
@@ -1541,7 +1541,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 4,
         organisation_id: 1,
         type: 'leave',
@@ -1550,7 +1550,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 4,
         organisation_id: 1,
         type: 'leave',
@@ -1559,7 +1559,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 4,
         organisation_id: 1,
         type: 'shift',
@@ -1568,7 +1568,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 4,
         organisation_id: 1,
         type: 'shift',
@@ -1577,7 +1577,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 4,
         organisation_id: 1,
         type: 'shift',
@@ -1587,7 +1587,7 @@ module.exports = {
       },
       // Justin Wong
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 5,
         organisation_id: 1,
         type: 'leave',
@@ -1596,7 +1596,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 5,
         organisation_id: 1,
         type: 'leave',
@@ -1605,7 +1605,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 5,
         organisation_id: 1,
         type: 'leave',
@@ -1614,7 +1614,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 5,
         organisation_id: 1,
         type: 'shift',
@@ -1623,7 +1623,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 5,
         organisation_id: 1,
         type: 'shift',
@@ -1632,7 +1632,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 5,
         organisation_id: 1,
         type: 'shift',
@@ -1642,7 +1642,7 @@ module.exports = {
       },
       // Chiew Jia En
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 6,
         organisation_id: 1,
         type: 'leave',
@@ -1651,7 +1651,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 6,
         organisation_id: 1,
         type: 'leave',
@@ -1660,7 +1660,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 6,
         organisation_id: 1,
         type: 'leave',
@@ -1669,7 +1669,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 6,
         organisation_id: 1,
         type: 'shift',
@@ -1678,7 +1678,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 6,
         organisation_id: 1,
         type: 'shift',
@@ -1687,7 +1687,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 6,
         organisation_id: 1,
         type: 'shift',
@@ -1697,7 +1697,7 @@ module.exports = {
       },
       // Wong Shen Nan
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 7,
         organisation_id: 1,
         type: 'leave',
@@ -1706,7 +1706,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 7,
         organisation_id: 1,
         type: 'leave',
@@ -1715,7 +1715,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 7,
         organisation_id: 1,
         type: 'leave',
@@ -1724,7 +1724,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 7,
         organisation_id: 1,
         type: 'shift',
@@ -1733,7 +1733,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 7,
         organisation_id: 1,
         type: 'shift',
@@ -1742,7 +1742,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 7,
         organisation_id: 1,
         type: 'shift',
@@ -1752,7 +1752,7 @@ module.exports = {
       },
       // Lee Chuan Xin
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -1761,7 +1761,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -1770,16 +1770,16 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 8,
-        organisation_id: 2,
+        organisation_id: 1,
         type: 'leave',
         date_at: new Date('2021-12-27'),
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -1788,7 +1788,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -1797,7 +1797,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -1806,7 +1806,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 8,
         organisation_id: 1,
         type: 'leave',
@@ -1815,7 +1815,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 8,
         organisation_id: 1,
         type: 'shift',
@@ -1824,7 +1824,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 8,
         organisation_id: 1,
         type: 'shift',
@@ -1833,7 +1833,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 8,
         organisation_id: 1,
         type: 'shift',
@@ -1842,7 +1842,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 8,
         organisation_id: 1,
         type: 'shift',
@@ -1851,7 +1851,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        optimisation_id: 3,
+        schedule_id: 3,
         user_id: 8,
         organisation_id: 1,
         type: 'shift',
@@ -1863,6 +1863,8 @@ module.exports = {
   },
   // to create default world json here
   down: async (queryInterface) => {
+    await queryInterface.bulkDelete('optimisations', null, {});
+    await queryInterface.bulkDelete('schedules', null, {});
     // drop events before users, because events have foreign keys in users and orgs
     await queryInterface.bulkDelete('events', null, {});
     // drop users before orgs, because users have foreign keys in orgs
