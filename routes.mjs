@@ -5,14 +5,15 @@ import initLoginController from './controllers/login.mjs';
 import initSignupController from './controllers/signup.mjs';
 import initTripsController from './controllers/trips.mjs';
 import initEventsController from './controllers/events.mjs';
+import initOptimisationsController from './controllers/optimisations.mjs';
 
 export default function bindRoutes(app) {
   // pass in the db for all items callbacks
   const LoginController = initLoginController(db);
   const SignupController = initSignupController(db);
-  // const WorkerController = initWorkerController();
   const TripsController = initTripsController(db);
   const EventsController = initEventsController(db);
+  const OptimisationsController = initOptimisationsController(db);
 
   // Auth
   app.post('/api/login/', LoginController.create);
@@ -26,6 +27,7 @@ export default function bindRoutes(app) {
 
   // Admin
   app.get('/api/admin/:adminId/year/:year/month/:month/schedule', EventsController.showAdminEventsByMonth);
+  app.get('/api/admin/:adminId/year/:year/month/:month/optimisations', OptimisationsController.show);
 
   app.get('/trips', TripsController.index);
 }
