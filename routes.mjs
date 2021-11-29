@@ -28,6 +28,7 @@ export default function bindRoutes(app) {
   // Admin
   app.get('/api/admin/:adminId/year/:year/month/:month/schedule', EventsController.showAdminEventsByMonth);
   app.get('/api/admin/:adminId/year/:year/month/:month/optimisations', OptimisationsController.show);
+  app.put('/api/admin/:adminId/schedule/:scheduleId/select', OptimisationsController.select);
 
   app.get('/trips', TripsController.index);
 }
