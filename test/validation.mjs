@@ -3,7 +3,7 @@ import * as validation from '../validation.mjs';
 
 describe('HRMS Backend', () => {
   describe('Validation', () => {
-    it('Checks for an empty password field on login', () => {
+    it('Disallows empty passwords', () => {
       const passwordValidationObj = validation.validatePassword(
         { password: '' },
         'login',
