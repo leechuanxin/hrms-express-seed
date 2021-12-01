@@ -36,7 +36,7 @@ const validateUserDescription = (userInfo) => {
   return obj;
 };
 
-const validatePassword = (userInfo, type) => {
+export const validatePassword = (userInfo, type) => {
   const obj = {};
   if (type === 'login') {
     if (!userInfo.password || userInfo.password.trim === '') {
