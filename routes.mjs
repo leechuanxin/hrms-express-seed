@@ -3,7 +3,6 @@ import db from './models/index.mjs';
 // import your controllers here
 import initLoginController from './controllers/login.mjs';
 import initSignupController from './controllers/signup.mjs';
-import initTripsController from './controllers/trips.mjs';
 import initEventsController from './controllers/events.mjs';
 import initOptimisationsController from './controllers/optimisations.mjs';
 
@@ -11,7 +10,6 @@ export default function bindRoutes(app) {
   // pass in the db for all items callbacks
   const LoginController = initLoginController(db);
   const SignupController = initSignupController(db);
-  const TripsController = initTripsController(db);
   const EventsController = initEventsController(db);
   const OptimisationsController = initOptimisationsController(db);
 
@@ -33,6 +31,4 @@ export default function bindRoutes(app) {
   app.put('/api/admin/:adminId/optimisation/:optimisationId', OptimisationsController.edit);
   app.delete('/api/admin/:adminId/optimisation/:optimisationId', OptimisationsController.adminDelete);
   app.post('/api/admin/:adminId/optimisation', OptimisationsController.create);
-
-  app.get('/trips', TripsController.index);
 }
