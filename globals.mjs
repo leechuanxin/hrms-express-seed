@@ -10,4 +10,3 @@ export const WORKER_NOT_FOUND = 'This worker cannot be found.';
 export const ADMIN_NOT_FOUND = 'This worker cannot be found.';
 export const EVENT_NOT_FOUND = 'This event cannot be found.';
 export const SCHEDULE_NOT_FOUND = 'This schedule cannot be found.';
-export const USER_NOT_FOUND = 'user not found';
