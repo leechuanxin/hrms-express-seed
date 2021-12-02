@@ -10,7 +10,7 @@ export function getHash(input) {
 
   return shaObj.getHash('HEX');
 }
-
+// Hello Heroku
 export const getInvalidFormRequests = (obj) => Object.keys(obj).filter((key) => key.indexOf('invalid') >= 0);
 
 export const getMonthDate = (date, type) => {
